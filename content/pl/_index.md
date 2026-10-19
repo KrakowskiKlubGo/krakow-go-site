@@ -1,0 +1,3 @@
+---
+title: Krakowski Klub Go
+---

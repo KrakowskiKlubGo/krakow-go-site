@@ -1,0 +1,6 @@
+{{- $start := partial "format-date.html" (dict "date" .start "style" "event") -}}
+{{- if and .end (ne (string .end) (string .start)) -}}
+  {{- $end := partial "format-date.html" (dict "date" .end "style" "event") -}}
+  {{- return printf "%s - %s" $start $end -}}
+{{- end -}}
+{{- return $start -}}

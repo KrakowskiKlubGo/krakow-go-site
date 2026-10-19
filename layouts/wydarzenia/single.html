@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{- $meeting := hugo.Data.club.regular_meeting -}}
+{{- $trimmed := strings.TrimSuffix "/" $meeting.page -}}
+{{- $parts := split $trimmed "/" -}}
+{{- $slug := index $parts (sub (len $parts) 1) -}}
+{{- $isMain := and .Params.regular (eq .File.ContentBaseName $slug) -}}
+{{- $time := cond $isMain (index $meeting.time site.Language.Lang) .Params.time -}}
+{{- $address := cond $isMain $meeting.address .Params.address -}}
+{{- $map := cond $isMain $meeting.map .Params.map -}}
+<div class="max-w-screen-xl mx-auto md:min-h-[calc(100vh-190px)] justify-center bg-base-100 p-10 md:m-10 m-px md:rounded-box prose">
+    <h1>{{ .Title }}</h1>
+    {{- if .Params.regular }}
+    <h3 data-next-meeting-date data-date-style="event">{{ partial "next-meeting-label.html" (dict "style" "event") }}</h3>
+    {{- else }}
+    <h3>{{ partial "format-date.html" (dict "date" .Date "style" "event") }}</h3>
+    {{- end }}
+    {{- with $time }}
+    <h3>{{ . }}</h3>
+    {{- end }}
+    {{ .Content }}
+    {{- with $address }}
+    <h2>{{ . }}</h2>
+    {{- end }}
+    {{- with $map }}
+    <iframe
+        src="{{ . }}"
+        allowFullScreen="false"
+        width="100%"
+        height="500"
+    ></iframe>
+    {{- end }}
+</div>
+{{ end }}

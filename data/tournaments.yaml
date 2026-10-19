@@ -1,0 +1,40 @@
+- name: Turniej o Smoczy Kamień 2026
+  start: "2026-05-09"
+  end: "2026-05-10"
+  url: "https://europeangodatabase.eu/EGD/Tournament_Card.php?&key=T260509C"
+- name: VII Jednodniowy Krakowski Turniej Go
+  start: "2025-02-15"
+  url: "https://europeangodatabase.eu/EGD/Tournament_Card.php?&key=T250215I"
+- name: Turniej o Smoczy Kamień 2024
+  start: "2024-06-15"
+  end: "2024-06-16"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T240615H"
+- name: III Turniej o Kufel Artefaktu
+  start: "2024-02-03"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T240203A"
+- name: II Turniej o Kufel Artefaktu
+  start: "2023-11-18"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T231118B"
+- name: I Turniej o Kufel Artefaktu
+  start: "2023-09-02"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T230902A"
+- name: Smoczy Kamień 2023
+  start: "2023-06-03"
+  end: "2023-06-04"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T230603A"
+- name: I Krakowski Jelonkowy Turniej Go
+  start: "2023-04-29"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T230429F"
+- name: III turniej w Szopie
+  start: "2023-02-11"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T230211C"
+- name: II turniej w Szopie
+  start: "2022-10-21"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T221021A"
+- name: Wakacyjny Turniej Hendikapowy
+  start: "2022-08-06"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T220806A"
+- name: Turniej o Smoczy Kamień 2022
+  start: "2022-05-14"
+  end: "2022-05-15"
+  url: "https://www.europeangodatabase.eu/EGD/Tournament_Card.php?&key=T220514G"

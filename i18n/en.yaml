@@ -1,0 +1,22 @@
+start:
+  other: START
+events:
+  other: Events
+more:
+  other: More
+club:
+  other: Club
+club_blurb:
+  other: "Cracow Go Club is a place where Go enthusiasts meet. In our club you will find both beginners and advanced players. We invite you to weekly meetings and tournaments."
+contact:
+  other: Contact
+contact_blurb:
+  other: "You can contact us through the following channels"
+site_name:
+  other: Cracow Go Club
+upcoming_tournaments:
+  other: Upcoming tournaments
+finished_tournaments:
+  other: Finished tournaments
+not_found:
+  other: Page not found

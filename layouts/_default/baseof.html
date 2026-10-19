@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Krakowski Klub Go</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ "static/css/dist/styles.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "static/web_pages/style.css" | relURL }}">
+    {{- if .HasShortcode "sgf" }}
+    <link rel="stylesheet" href="{{ "vendor/besogo/besogo.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "vendor/besogo/board-dark.css" | relURL }}">
+    {{- end }}
+</head>
+<body class="bg-gray-100 font-serif leading-normal tracking-normal background">
+    {{ partial "navbar.html" . }}
+    <div class="background"></div>
+    <div class="max-w-screen-xl justify-center mx-auto md:my-10 my-px">
+        {{ block "main" . }}{{ end }}
+    </div>
+    {{- if .HasShortcode "sgf" }}
+    <script src="{{ "vendor/besogo/besogo.all.js" | relURL }}"></script>
+    <script>besogo.autoInit();</script>
+    {{- end }}
+    <script src="{{ "js/club-schedule.js" | relURL }}"></script>
+</body>
+</html>

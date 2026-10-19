@@ -1,0 +1,22 @@
+start:
+  other: START
+events:
+  other: Wydarzenia
+more:
+  other: Więcej
+club:
+  other: Klub
+club_blurb:
+  other: "Krakowski Klub Go to miejsce, w którym spotykają się miłośnicy gry Go. W naszym klubie znajdziesz zarówno początkujących, jak i zaawansowanych graczy. Zapraszamy na cotygodniowe spotkania oraz turnieje."
+contact:
+  other: Kontakt
+contact_blurb:
+  other: "Możesz się z nami skontaktować poprzez następujące kanały"
+site_name:
+  other: Krakowski Klub Go
+upcoming_tournaments:
+  other: Nadchodzące turnieje
+finished_tournaments:
+  other: Zakończone turnieje
+not_found:
+  other: Nie znaleziono strony

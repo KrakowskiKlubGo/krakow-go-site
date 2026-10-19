@@ -1,0 +1,26 @@
+{{- $style := .style | default "event" -}}
+{{- $y := 0 -}}
+{{- $m := 0 -}}
+{{- $d := 0 -}}
+{{- if eq (printf "%T" .date) "string" -}}
+  {{- $parts := split .date "-" -}}
+  {{- $y = int (index $parts 0) -}}
+  {{- $m = int (strings.TrimPrefix "0" (index $parts 1)) -}}
+  {{- $d = int (strings.TrimPrefix "0" (index $parts 2)) -}}
+{{- else -}}
+  {{- $y = .date.Year -}}
+  {{- $m = int .date.Month -}}
+  {{- $d = .date.Day -}}
+{{- end -}}
+{{- $monthsPL := slice "" "stycznia" "lutego" "marca" "kwietnia" "maja" "czerwca" "lipca" "sierpnia" "września" "października" "listopada" "grudnia" -}}
+{{- $monthsLong := slice "" "January" "February" "March" "April" "May" "June" "July" "August" "September" "October" "November" "December" -}}
+{{- $monthsN := slice "" "Jan." "Feb." "March" "April" "May" "June" "July" "Aug." "Sept." "Oct." "Nov." "Dec." -}}
+{{- $label := "" -}}
+{{- if eq site.Language.Lang "pl" -}}
+  {{- $label = printf "%d %s %d" $d (index $monthsPL $m) $y -}}
+{{- else if eq $style "long" -}}
+  {{- $label = printf "%s %d, %d" (index $monthsLong $m) $d $y -}}
+{{- else -}}
+  {{- $label = printf "%s %d, %d" (index $monthsN $m) $d $y -}}
+{{- end -}}
+{{- return $label -}}

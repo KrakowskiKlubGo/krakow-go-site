@@ -1,0 +1,55 @@
+baseURL = "https://krakow.go.art.pl/"
+title = "Krakowski Klub Go"
+defaultContentLanguage = "pl"
+defaultContentLanguageInSubdir = false
+timeZone = "Europe/Warsaw"
+enableRobotsTXT = false
+disableHugoGeneratorInject = true
+
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputFormats.clubconfig]
+  mediaType = "application/json"
+  baseName = "club"
+  isPlainText = true
+  notAlternative = true
+
+[languages.pl]
+  label = "Polski"
+  weight = 1
+  contentDir = "content/pl"
+  locale = "pl_PL"
+
+[languages.en]
+  label = "English"
+  weight = 2
+  contentDir = "content/en"
+  locale = "en_US"
+
+# Fixed menu entries. START is rendered by the navbar partial.
+# Pin an article from its front matter instead of adding it here.
+# To open a submenu, uncomment a parent below and set `parent` on the article.
+[[languages.pl.menus.main]]
+  name = "TURNIEJE"
+  pageRef = "/turnieje"
+  weight = 10
+
+# [[languages.pl.menus.main]]
+#   identifier = "o-klubie"
+#   name = "O klubie"
+#   weight = 30
+
+[[languages.en.menus.main]]
+  name = "TOURNAMENTS"
+  pageRef = "/turnieje"
+  weight = 10
+
+# [[languages.en.menus.main]]
+#   identifier = "about"
+#   name = "About"
+#   weight = 30

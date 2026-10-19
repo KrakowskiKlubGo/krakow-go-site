@@ -1,0 +1,17 @@
+<li><a class="text-lg" href="{{ site.Home.RelPermalink }}">{{ i18n "start" }}</a></li>
+{{- range site.Menus.main }}
+  {{- if .HasChildren }}
+    <li>
+      <details>
+        <summary class="text-lg">{{ .Name }}</summary>
+        <ul>
+          {{- range .Children }}
+            <li><a class="text-lg" href="{{ .URL }}">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+      </details>
+    </li>
+  {{- else if .URL }}
+    <li><a class="text-lg" href="{{ .URL }}">{{ .Name }}</a></li>
+  {{- end }}
+{{- end }}

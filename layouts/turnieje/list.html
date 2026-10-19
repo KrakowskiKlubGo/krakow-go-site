@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $sorted := sort hugo.Data.tournaments "start" "desc" -}}
+{{- $upcoming := slice -}}
+{{- $past := slice -}}
+{{- range $sorted -}}
+  {{- $end := .end | default .start -}}
+  {{- if ge (printf "%v" $end) $today -}}
+    {{- $upcoming = $upcoming | append . -}}
+  {{- else -}}
+    {{- $past = $past | append . -}}
+  {{- end -}}
+{{- end }}
+<div class="max-w-screen-xl mx-auto md:min-h-[calc(100vh-190px)] justify-center bg-base-100 p-10 md:m-10 m-px md:rounded-box prose">
+    {{- if $upcoming }}
+    <h1 class="text-3xl font-bold">{{ i18n "upcoming_tournaments" }}</h1>
+    <ul class="menu menu-lg bg-base-100 rounded-box">
+        {{- range $upcoming }}
+        <li>
+            <a class="no-underline card-compact p-0" target="_blank" href="{{ .url }}">
+                <div class="card-body p-0">
+                    <p class="card-title text-2xl m-0">{{ .name }}</p>
+                    <p class="m-0">{{ partial "date-range.html" . }}</p>
+                </div>
+            </a>
+        </li>
+        {{- end }}
+    </ul>
+    {{- end }}
+    <h1 class="text-3xl font-bold">{{ i18n "finished_tournaments" }}</h1>
+    <ul class="menu menu-lg bg-base-100 rounded-box">
+        {{- range $past }}
+        <li>
+            {{- if .url }}
+            <a class="no-underline card-compact p-0" target="_blank" href="{{ .url }}">
+            {{- else }}
+            <a class="no-underline card-compact p-0">
+            {{- end }}
+                <div class="card-body p-0">
+                    <p class="card-title text-2xl m-0">{{ .name }}</p>
+                    <p class="m-0">{{ partial "date-range.html" . }}</p>
+                </div>
+            </a>
+        </li>
+        {{- end }}
+    </ul>
+</div>
+{{ end }}

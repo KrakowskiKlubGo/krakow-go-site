@@ -1,0 +1,2 @@
+{{- $meeting := hugo.Data.club.regular_meeting -}}
+{{- dict "weekday" $meeting.weekday "timezone" "Europe/Warsaw" | jsonify -}}

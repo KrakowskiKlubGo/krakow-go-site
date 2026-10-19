@@ -1,0 +1,84 @@
+{{ define "main" }}
+{{- $meeting := hugo.Data.club.regular_meeting -}}
+{{- $lang := site.Language.Lang -}}
+{{- $today := now.Format "2006-01-02" -}}
+<div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="card bg-base-100 text-primary-content mb-px md:m-2 rounded-none md:rounded-lg">
+        <div class="card-body items-center">
+            <div class="text-3xl font-bold prose">{{ i18n "site_name" }}</div>
+            <img class="w-full h-auto" src="{{ "static/web_pages/images/logo.png" | relURL }}">
+        </div>
+    </div>
+
+    <div class="card bg-base-100 text-primary-content mb-px md:m-2 rounded-none md:rounded-lg">
+        <div class="card-body">
+            <h2 class="card-title prose">{{ i18n "events" }}</h2>
+            <div class="card bg-primary text-primary-content m-2">
+                <div class="card-body">
+                    <div class="card-title font-bold">
+                        {{ partial "icon-calendar.html" . }}
+                        <div>{{ index $meeting.card_title $lang }}</div>
+                    </div>
+                    <div data-next-meeting-date data-date-style="long">{{ partial "next-meeting-label.html" (dict "style" "long") }}</div>
+                    <div>{{ $meeting.card_time }}</div>
+                    <div>{{ $meeting.card_venue }}</div>
+                    <a class="btn text-lg" href="{{ $meeting.page | relLangURL }}">{{ i18n "more" }}</a>
+                </div>
+            </div>
+            {{- range hugo.Data.club.one_time_events }}
+              {{- $end := .end | default .start -}}
+              {{- if ge (printf "%v" $end) $today }}
+            <div class="card bg-primary text-primary-content m-2" data-hide-after="{{ $end }}">
+                <div class="card-body">
+                    <div class="card-title font-bold">
+                        {{ partial "icon-calendar.html" . }}
+                        <div>{{ index .title $lang }}</div>
+                    </div>
+                    <div>{{ partial "format-date.html" (dict "date" .start "style" "event") }}</div>
+                    {{- with .time }}<div>{{ . }}</div>{{ end }}
+                    {{- with index .venue $lang }}<div>{{ . }}</div>{{ end }}
+                    {{- with .page }}
+                    <a class="btn text-lg" href="{{ . | relLangURL }}">{{ i18n "more" }}</a>
+                    {{- end }}
+                </div>
+            </div>
+              {{- end }}
+            {{- end }}
+            {{- with hugo.Data.club.featured_tournament }}
+              {{- $end := .end | default .start -}}
+              {{- if ge (printf "%v" $end) $today }}
+            <div class="card bg-secondary text-primary-content m-2" data-hide-after="{{ $end }}">
+                <div class="card-body">
+                    <div class="card-title font-bold">
+                        {{ partial "icon-trophy.html" . }}
+                        <div>{{ .name }}</div>
+                    </div>
+                    {{ partial "date-range.html" . }}
+                    {{- with .place }}{{ . }}{{ end }}
+                    {{- with .url }}
+                    <a class="btn text-lg" target="_blank" href="{{ . }}">{{ i18n "more" }}</a>
+                    {{- end }}
+                </div>
+            </div>
+              {{- end }}
+            {{- end }}
+        </div>
+    </div>
+
+    <div class="card bg-base-100 text-primary-content mb-px md:m-2 rounded-none md:rounded-lg">
+        <div class="card-body">
+            <h2 class="card-title prose">{{ i18n "club" }}</h2>
+            <p class="prose">{{ i18n "club_blurb" }}</p>
+            {{ partial "carousel.html" . }}
+        </div>
+    </div>
+
+    <div class="card bg-base-100 text-primary-content mb-px md:m-2 rounded-none md:rounded-lg">
+        <div class="card-body">
+            <h2 class="card-title prose">{{ i18n "contact" }}</h2>
+            <div class="prose">{{ i18n "contact_blurb" }}</div>
+            {{ partial "contact.html" . }}
+        </div>
+    </div>
+</div>
+{{ end }}

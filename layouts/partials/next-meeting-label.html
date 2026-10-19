@@ -1,0 +1,2 @@
+{{- $date := partial "next-weekday.html" hugo.Data.club.regular_meeting.weekday -}}
+{{- return partial "format-date.html" (dict "date" $date "style" .style) -}}

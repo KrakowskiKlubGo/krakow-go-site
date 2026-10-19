@@ -1,0 +1,8 @@
+{{- $names := dict "sunday" 0 "monday" 1 "tuesday" 2 "wednesday" 3 "thursday" 4 "friday" 5 "saturday" 6 -}}
+{{- $target := index $names . -}}
+{{- $today := now -}}
+{{- $ahead := sub $target (int $today.Weekday) -}}
+{{- if lt $ahead 0 -}}
+  {{- $ahead = add $ahead 7 -}}
+{{- end -}}
+{{- return $today.AddDate 0 0 $ahead -}}
