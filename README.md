@@ -82,10 +82,8 @@ Put the file in `static/sgf/` and add this to the article:
 {{< sgf src="/sgf/example.sgf" >}}
 ```
 
-The record is shown with [Besogo](https://github.com/yewang/besogo), vendored under `static/vendor/besogo/` (MIT). See `/p/przyklad-sgf/` for a working example. Delete that page if you do not want it on the site.
+The record is shown with [Besogo](https://github.com/yewang/besogo), vendored under `static/vendor/besogo/` (MIT). See `/p/przyklad-sgf/` for a working example.
 
 ## Deploy
 
 On every push to `main`, `.github/workflows/deploy.yml` builds the site and uploads `public/` to `/public_html/`. The repository needs the same secrets as the old Django workflow: `FTP_LOCATION`, `FTP_USERNAME`, and `FTP_PASSWORD`.
-
-Turn off `.github/workflows/push_ftp.yml` in the Django repository before this workflow goes live, so the two deploys do not overwrite each other. The first upload does not delete files left from the old site. After checking the result, one run with `dangerous-clean-slate: true` on the FTP step removes those leftovers.
