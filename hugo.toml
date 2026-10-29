@@ -39,6 +39,11 @@ disableKinds = ["taxonomy", "term", "RSS"]
   pageRef = "/turnieje"
   weight = 10
 
+[[languages.pl.menus.main]]
+  name = "PARTIE"
+  pageRef = "/partie"
+  weight = 15
+
 # [[languages.pl.menus.main]]
 #   identifier = "o-klubie"
 #   name = "O klubie"
@@ -48,6 +53,11 @@ disableKinds = ["taxonomy", "term", "RSS"]
   name = "TOURNAMENTS"
   pageRef = "/turnieje"
   weight = 10
+
+[[languages.en.menus.main]]
+  name = "GAMES"
+  pageRef = "/partie"
+  weight = 15
 
 # [[languages.en.menus.main]]
 #   identifier = "about"

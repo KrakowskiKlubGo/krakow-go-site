@@ -20,3 +20,9 @@ finished_tournaments:
   other: Zakończone turnieje
 not_found:
   other: Nie znaleziono strony
+pagination:
+  other: Stronicowanie
+previous:
+  other: Poprzednia
+next:
+  other: Następna

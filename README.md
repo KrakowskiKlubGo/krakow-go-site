@@ -84,6 +84,12 @@ Put the file in `static/sgf/` and add this to the article:
 
 The record is shown with [Besogo](https://github.com/yewang/besogo), vendored under `static/vendor/besogo/` (MIT). See `/p/przyklad-sgf/` for a working example.
 
+## Club games
+
+Put `*.sgf` files in `static/club_games/`. Hugo publishes one page per file at `/partie/<filename>/` and `/en/partie/<filename>/`, and lists them on `/partie/` (20 per page, alphabetical by title). The menu entries are PARTIE and GAMES.
+
+The page title is the first `GN[...]` value in the file. If that property is missing or blank, the title is the filename without the extension. The address follows the filename, not the game name. Hugo reads only the first 1 MB of each file when taking the title; the file itself is still served whole from `static/club_games/`.
+
 ## Deploy
 
 On every push to `main`, `.github/workflows/deploy.yml` builds the site and uploads `public/` to `/public_html/`. The repository needs the same secrets as the old Django workflow: `FTP_LOCATION`, `FTP_USERNAME`, and `FTP_PASSWORD`.

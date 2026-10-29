@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "static/css/dist/styles.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "static/web_pages/style.css" | relURL }}">
-    {{- if .HasShortcode "sgf" }}
-    <link rel="stylesheet" href="{{ "vendor/besogo/besogo.css" | relURL }}">
-    <link rel="stylesheet" href="{{ "vendor/besogo/board-dark.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "static/web_pages/style.css" | relURL }}?v=3">
+    {{- if or (.HasShortcode "sgf") (and .IsPage (eq .Section "partie")) }}
+    <link rel="stylesheet" href="{{ "vendor/besogo/besogo.css" | relURL }}?v=4">
+    <link rel="stylesheet" href="{{ "vendor/besogo/board-light.css" | relURL }}">
     {{- end }}
 </head>
 <body class="bg-gray-100 font-serif leading-normal tracking-normal background">
@@ -21,8 +21,8 @@
     <div class="max-w-screen-xl justify-center mx-auto md:my-10 my-px">
         {{ block "main" . }}{{ end }}
     </div>
-    {{- if .HasShortcode "sgf" }}
-    <script src="{{ "vendor/besogo/besogo.all.js" | relURL }}"></script>
+    {{- if or (.HasShortcode "sgf") (and .IsPage (eq .Section "partie")) }}
+    <script src="{{ "vendor/besogo/besogo.all.js" | relURL }}?v=3"></script>
     <script>besogo.autoInit();</script>
     {{- end }}
     <script src="{{ "js/club-schedule.js" | relURL }}"></script>

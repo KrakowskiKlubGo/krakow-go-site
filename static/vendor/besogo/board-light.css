@@ -1,0 +1,34 @@
+/* Light kaya board. Same roles as board-dark.css, without the photo from board-wood.css. */
+
+.besogo-svg-board {
+    fill: #ebb660;
+}
+
+.besogo-svg-lines {
+    stroke: #151515;
+    stroke-width: 2.5;
+    fill: none;
+}
+
+.besogo-svg-hoshi {
+    stroke: #151515;
+    stroke-width: 12;
+}
+
+.besogo-svg-blackStone {
+    fill: #252525;
+    stroke: #252525;
+    stroke-width: 4;
+}
+
+.besogo-svg-whiteStone {
+    fill: #f7f4ef;
+    stroke: #8a7b68;
+    stroke-width: 3;
+}
+
+.besogo-svg-greyStone {
+    fill: #929591;
+    stroke: #929591;
+    stroke-width: 4;
+}

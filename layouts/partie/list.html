@@ -1,0 +1,30 @@
+{{ define "main" }}
+{{- $paginator := .Paginate (.RegularPages.ByTitle) 20 -}}
+<div class="max-w-screen-xl mx-auto md:min-h-[calc(100vh-190px)] justify-center bg-base-100 p-10 md:m-10 m-px md:rounded-box prose">
+    <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+    <ul class="menu menu-lg bg-base-100 rounded-box">
+        {{- range $paginator.Pages }}
+        <li>
+            <a class="no-underline card-compact p-0" href="{{ .RelPermalink }}">
+                <div class="card-body p-0">
+                    <p class="card-title text-2xl m-0">{{ .Title }}</p>
+                </div>
+            </a>
+        </li>
+        {{- end }}
+    </ul>
+    {{- if gt $paginator.TotalPages 1 }}
+    <nav class="join mt-6" aria-label="{{ i18n "pagination" }}">
+        {{- if $paginator.HasPrev }}
+        <a class="join-item btn" href="{{ $paginator.Prev.URL }}">{{ i18n "previous" }}</a>
+        {{- end }}
+        {{- range $paginator.Pagers }}
+        <a class="join-item btn{{ if eq .PageNumber $paginator.PageNumber }} btn-active{{ end }}" href="{{ .URL }}">{{ .PageNumber }}</a>
+        {{- end }}
+        {{- if $paginator.HasNext }}
+        <a class="join-item btn" href="{{ $paginator.Next.URL }}">{{ i18n "next" }}</a>
+        {{- end }}
+    </nav>
+    {{- end }}
+</div>
+{{ end }}

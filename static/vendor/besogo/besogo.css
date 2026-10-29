@@ -94,18 +94,25 @@
 }
 
 .besogo-comment {
+    color: black;
     font-family: Georgia, serif;
     font-size: 12pt;
     white-space: pre-wrap;
 
 
     overflow: auto;
-    flex: 1 1 60%;
+    flex: 0 1 auto;
+    max-height: 40%;
     width: 100%;
 }
 
 .besogo-comment input[type='button'] {
     float: right;
+}
+
+.besogo-comment input[value='Comment'],
+.besogo-comment input[value='Edit Info'] {
+    display: none !important;
 }
 
 .besogo-comment textarea {
@@ -118,8 +125,10 @@
     border-collapse: collapse;
 }
 
-.besogo-gameInfo td, tr {
+.besogo-gameInfo td,
+.besogo-gameInfo tr {
     border: 1px solid black;
+    color: black;
     padding: 3px;
 }
 
@@ -135,7 +144,8 @@
 
 .besogo-tree {
     overflow: auto;
-    flex: 1 1 40%;
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
 }
 

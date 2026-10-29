@@ -59,7 +59,7 @@ besogo.create = function(container, options) {
     if (options.sgf) { // Load SGF file from URL or SGF string
         let validURL = false;
         try {
-            new URL(options.sgf);
+            new URL(options.sgf, document.baseURI);
             validURL = true;
         } catch (e) {}
 
@@ -395,6 +395,9 @@ function navigatePath(editor, path) {
     var subPaths,
         i, j; // Scratch iteration variables
 
+    if (!path) {
+        return;
+    }
     path = path.split(/[Nn]+/); // Split into parts that start in next mode
     for (i = 0; i < path.length; i++) {
         subPaths = path[i].split(/[Bb]+/); // Split on switches into branch mode
@@ -1035,8 +1038,6 @@ besogo.makeCommentPanel = function(container, editor) {
         };
 
     container.appendChild(makeInfoButton());
-    container.appendChild(makeInfoEditButton());
-    container.appendChild(makeCommentButton());
     container.appendChild(gameInfoTable);
     container.appendChild(gameInfoEdit);
     infoTexts.C = document.createTextNode('');

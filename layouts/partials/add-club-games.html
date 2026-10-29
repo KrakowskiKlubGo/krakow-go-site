@@ -1,0 +1,17 @@
+{{- $adapter := . -}}
+{{- range os.ReadDir "static/club_games" -}}
+  {{- if and (not .IsDir) (eq (lower (path.Ext .Name)) ".sgf") -}}
+    {{- $stem := .Name | strings.TrimSuffix (path.Ext .Name) -}}
+    {{- $title := $stem -}}
+    {{- $raw := os.ReadFile (path.Join "static/club_games" .Name) -}}
+    {{- with findRESubmatch `GN\[((?:\\.|[^\]])*)\]` $raw 1 -}}
+      {{- $gn := index (index . 0) 1 | replaceRE `\\(.)` "$1" | strings.TrimSpace -}}
+      {{- if $gn -}}
+        {{- $title = $gn -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $src := printf "/club_games/%s" .Name -}}
+    {{- $content := dict "mediaType" "text/markdown" "value" (printf "{{< sgf src=%q >}}" $src) -}}
+    {{- $adapter.AddPage (dict "kind" "page" "path" $stem "title" $title "content" $content) -}}
+  {{- end -}}
+{{- end -}}
