@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $paginator := .Paginate (.RegularPages.ByTitle) 20 -}}
+{{- $paginator := .Paginate (.RegularPages.ByTitle.Reverse) 20 -}}
 <div class="max-w-screen-xl mx-auto md:min-h-[calc(100vh-190px)] justify-center bg-base-100 p-10 md:m-10 m-px md:rounded-box prose">
     <h1 class="text-3xl font-bold">{{ .Title }}</h1>
     <ul class="menu menu-lg bg-base-100 rounded-box">
