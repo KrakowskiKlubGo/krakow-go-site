@@ -68,7 +68,7 @@ To also show it on the homepage until the day after it ends, set `featured_tourn
 
 The regular meeting is `data/club.yaml` under `regular_meeting`:
 
-- `weekday` (`monday` … `sunday`) is the only value the browser needs. The next date, including today when today is that weekday, is calculated in `Europe/Warsaw` when the page opens. Changing the weekday still needs a commit.
+- `weekday` (`monday` … `sunday`) and `skip_dates` are what the browser needs. The next date, including today when today is that weekday, is calculated in `Europe/Warsaw` when the page opens. A date in `skip_dates` (`YYYY-MM-DD`, on that weekday) is passed over and the following week is shown instead. Changing either value still needs a commit.
 - `card_time`, `card_venue`, and `card_title` are the homepage card.
 - `time`, `address`, and `map` are the `/wydarzenia/domowka/` page. `page` is that page's path.
 

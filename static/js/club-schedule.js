@@ -103,6 +103,10 @@
     var today = warsawParts(new Date());
     var delta = (target - today.weekday + 7) % 7;
     var next = addDays(today.year, today.month, today.day, delta);
+    var skips = config.skip_dates || [];
+    while (skips.indexOf(iso(next)) !== -1) {
+      next = addDays(next.year, next.month, next.day, 7);
+    }
     var lang = document.documentElement.lang || "pl";
     var nodes = document.querySelectorAll("[data-next-meeting-date]");
     for (var i = 0; i < nodes.length; i++) {

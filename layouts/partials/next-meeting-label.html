@@ -1,2 +1,5 @@
-{{- $date := partial "next-weekday.html" hugo.Data.club.regular_meeting.weekday -}}
+{{- $meeting := hugo.Data.club.regular_meeting -}}
+{{- $date := partial "next-weekday.html" $meeting.weekday -}}
+{{- $skips := $meeting.skip_dates | default slice -}}
+{{- $date = partial "skip-meeting-dates.html" (dict "date" $date "skips" $skips) -}}
 {{- return partial "format-date.html" (dict "date" $date "style" .style) -}}

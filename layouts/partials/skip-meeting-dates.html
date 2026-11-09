@@ -1,0 +1,6 @@
+{{- $date := .date -}}
+{{- $iso := $date.Format "2006-01-02" -}}
+{{- if in .skips $iso -}}
+  {{- return partial "skip-meeting-dates.html" (dict "date" ($date.AddDate 0 0 7) "skips" .skips) -}}
+{{- end -}}
+{{- return $date -}}

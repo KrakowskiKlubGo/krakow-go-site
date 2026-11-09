@@ -1,5 +1,7 @@
 regular_meeting:
   weekday: wednesday
+  skip_dates:
+    - "2026-11-11"
   page: /wydarzenia/domowka/
   card_time: "18:00"
   card_venue: IVY Cocktail Bar
