@@ -1,0 +1,92 @@
+name: Sync club games from Google Drive
+
+on:
+  schedule:
+    # Tuesday 19:00 Europe/Warsaw. GitHub cron is UTC, so run both seasonal
+    # hours and continue only when the Warsaw clock says 19.
+    - cron: "0 17,18 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  sync:
+    name: Sync club games
+    runs-on: ubuntu-latest
+    steps:
+      - name: Continue only at 19:00 Europe/Warsaw
+        id: gate
+        if: github.event_name == 'schedule'
+        run: |
+          hour=$(TZ=Europe/Warsaw date +%H)
+          if [ "$hour" = "19" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Warsaw hour is ${hour}; this run is the other seasonal slot."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Python
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install gdown
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        run: python -m pip install "gdown==6.5.1"
+
+      - name: Download missing SGF files
+        id: download
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        env:
+          GOOGLE_DRIVE_FOLDER: ${{ secrets.GOOGLE_DRIVE_FOLDER }}
+        run: |
+          set +e
+          python -u scripts/sync_club_games.py
+          code=$?
+          set -e
+          echo "code=${code}" >> "$GITHUB_OUTPUT"
+          if [ "$code" -eq 0 ] || [ "$code" -eq 2 ]; then
+            exit 0
+          fi
+          exit "$code"
+
+      - name: Commit new games
+        id: commit
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -d static/club_games ]; then
+            git add -- static/club_games
+          fi
+          if git diff --cached --quiet; then
+            echo "No new club games."
+            echo "added=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Add new club game records from Google Drive."
+          git push origin HEAD:main
+          echo "added=true" >> "$GITHUB_OUTPUT"
+
+      # A push with GITHUB_TOKEN does not start deploy.yml, so start it explicitly.
+      - name: Rebuild the site
+        if: steps.commit.outputs.added == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --ref main
+
+      - name: Fail when Drive file names clash
+        if: steps.download.outputs.code == '2'
+        run: |
+          echo "Some Google Drive SGF files share a file name and were not added."
+          exit 1

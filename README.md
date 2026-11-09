@@ -90,6 +90,8 @@ Put `*.sgf` files in `static/club_games/`. Hugo publishes one page per file at `
 
 The page title is the first `GN[...]` value in the file. If that property is missing or blank, the title is the filename without the extension. The address follows the filename, not the game name. Hugo reads only the first 1 MB of each file when taking the title; the file itself is still served whole from `static/club_games/`.
 
+`.github/workflows/sync-club-games.yml` runs every Tuesday at 19:00 Europe/Warsaw. It reads the Google Drive folder in the `GOOGLE_DRIVE_FOLDER` secret (a sharing link or a folder id). The folder must be shared as "Anyone with the link". SGF files whose names are not already in `static/club_games/` are committed, including files from subfolders, and that commit starts the deploy workflow. Existing files are left unchanged. Names are compared without regard to case.
+
 ## Deploy
 
 On every push to `main`, `.github/workflows/deploy.yml` builds the site and uploads `public/` to `/public_html/`. The repository needs the same secrets as the old Django workflow: `FTP_LOCATION`, `FTP_USERNAME`, and `FTP_PASSWORD`.
