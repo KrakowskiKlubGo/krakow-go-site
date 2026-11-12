@@ -2,6 +2,34 @@
     background: linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,.85)), url("images/bg_transparent.png");
 }
 
+/* Keep cards inside the viewport. DaisyUI menu rows size to max-content,
+   and the email address has no spaces, so the contact list was widening the page. */
+.grid > .card {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.contact-links {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-width: 0;
+}
+
+.menu.contact-links :where(li:not(.menu-title) > :not(ul, details, .menu-title, .btn)) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    gap: 0.5rem;
+}
+
+.menu.contact-links h2 {
+    min-width: 0;
+    flex: 1 1 auto;
+    overflow-wrap: break-word;
+}
+
 .besogo-embed {
     margin: 1.5rem 0;
     width: 100%;
